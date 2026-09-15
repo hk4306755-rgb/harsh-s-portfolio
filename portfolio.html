@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harsh Kanojia — Graphic Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#000;
+    --red:#ff1a1a;
+    --muted:#4a4a4a;
+    --rule:#d9d9d9;
+    --page:#fff;
+    --gap:14px;
+    --pad:28px;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:#e9e9e9;
+    color:var(--ink);
+    font-family:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:400;
+    line-height:1.45;
+  }
+
+  .page{
+    max-width:880px;
+    margin:0 auto;
+    background:var(--page);
+    padding:var(--pad) var(--pad) 60px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.06);
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:11px;
+    letter-spacing:.06em;
+    padding-bottom:22px;
+  }
+  .topbar a{color:var(--ink)}
+
+  /* ---------- cover ---------- */
+  .cover-title{
+    font-weight:900;
+    letter-spacing:-.02em;
+    line-height:.95;
+    margin:0 0 22px;
+  }
+  .cover-title span{display:block}
+  .cover-title .line-1{font-size:clamp(30px,7.4vw,58px)}
+  .cover-title .line-2{font-size:clamp(40px,10.2vw,80px);color:var(--red)}
+
+  .portrait{margin:0 0 26px}
+
+  .who{
+    font-weight:900;
+    font-size:clamp(17px,3.2vw,24px);
+    line-height:1.15;
+    letter-spacing:-.01em;
+    margin:0 0 12px;
+  }
+  .who span{display:block}
+
+  .intro{
+    margin:0;
+    max-width:62ch;
+    font-size:14px;
+    color:#1a1a1a;
+  }
+
+  /* ---------- sections ---------- */
+  .rule{border:0;border-top:1px solid var(--rule);margin:44px 0}
+
+  .section-title{
+    font-weight:900;
+    letter-spacing:-.01em;
+    font-size:clamp(16px,2.6vw,22px);
+    margin:0 0 16px;
+  }
+  .section-title.xl{font-size:clamp(24px,5vw,38px)}
+
+  .section-note{
+    margin:-6px 0 18px;
+    max-width:64ch;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .kicker{
+    font-weight:800;
+    font-size:12px;
+    letter-spacing:.02em;
+    margin:0 0 4px;
+  }
+  .kicker + .sub{
+    margin:0 0 16px;
+    font-size:11px;
+    color:#8a8a8a;
+  }
+
+  /* ---------- grids ---------- */
+  .stack{display:grid;gap:var(--gap)}
+  .grid-2{display:grid;gap:var(--gap);grid-template-columns:repeat(2,1fr)}
+  .grid-3{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
+  .logo-grid{
+    display:grid;
+    gap:26px 20px;
+    grid-template-columns:repeat(2,1fr);
+    align-items:center;
+  }
+  .type-grid{display:grid;gap:0;grid-template-columns:repeat(2,1fr)}
+  .type-grid figure{margin:0}
+
+  @media (min-width:700px){
+    .posts,.posters,.branding{grid-template-columns:repeat(2,1fr)}
+    .logo-grid{grid-template-columns:repeat(4,1fr)}
+    .type-grid{grid-template-columns:repeat(3,1fr)}
+  }
+
+  /* ---------- image frames ---------- */
+  figure{margin:0}
+
+  .shot{
+    position:relative;
+    display:block;
+    width:100%;
+    background:#f1f1f1;
+    overflow:hidden;
+  }
+  .shot img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .shot.ratio-1 {aspect-ratio:1/1}
+  .shot.ratio-45{aspect-ratio:4/5}
+  .shot.ratio-34{aspect-ratio:3/4}
+  .shot.ratio-23{aspect-ratio:2/3}
+  .shot.ratio-916{aspect-ratio:9/16}
+  .shot.ratio-169{aspect-ratio:16/9}
+  .shot.plain{background:#fff}
+  .shot.plain img{object-fit:contain}
+
+  /* placeholder shown until the real file is dropped in */
+  .shot[data-missing="true"]::after{
+    content:attr(data-label);
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:.04em;
+    color:#8d8d8d;
+    background:
+      repeating-linear-gradient(135deg,#f6f6f6 0 10px,#efefef 10px 20px);
+    border:1px solid var(--rule);
+  }
+  .shot[data-missing="true"] img{visibility:hidden}
+
+  .caption{
+    margin-top:6px;
+    font-size:11px;
+    color:#8a8a8a;
+  }
+
+  footer{
+    margin-top:56px;
+    padding-top:18px;
+    border-top:1px solid var(--rule);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--muted);
+  }
+  footer a{color:var(--ink)}
+
+  @media print{
+    body{background:#fff}
+    .page{box-shadow:none;max-width:none;padding:0}
+    .rule{margin:26px 0}
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ COVER ============ -->
+  <header class="topbar">
+    <span>HARSH</span>
+    <a href="mailto:graphixharsh@gmail.com">graphixharsh@gmail.com</a>
+  </header>
+
+  <h1 class="cover-title">
+    <span class="line-1">GRAPHIC DESIGN</span>
+    <span class="line-2">PORTFOLIO</span>
+  </h1>
+
+  <figure class="portrait">
+    <div class="shot ratio-34" data-label="portrait.jpg">
+      <img src="images/portrait.jpg" alt="Portrait of Harsh Kanojia">
+    </div>
+  </figure>
+
+  <h2 class="who">
+    <span>HARSH KANOJIA</span>
+    <span>GRAPHIC DESIGNER</span>
+  </h2>
+
+  <p class="intro">
+    I'm Harsh Kanojia, a graphic designer creating bold visual identities,
+    compelling brand experiences, and concept-driven design that connects with people.
+  </p>
+
+  <hr class="rule">
+
+  <!-- ============ POST DESIGNS ============ -->
+  <section>
+    <h2 class="section-title">POST DESIGNS</h2>
+    <div class="stack posts">
+      <figure>
+        <div class="shot ratio-1" data-label="post-baskin-robbins.jpg">
+          <img src="images/post-baskin-robbins.jpg" alt="Baskin Robbins shake campaign post">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1" data-label="post-samsung.jpg">
+          <img src="images/post-samsung.jpg" alt="Samsung Galaxy product post">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1" data-label="post-new-collection.jpg">
+          <img src="images/post-new-collection.jpg" alt="New collection drop apparel post">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1" data-label="post-hydration.jpg">
+          <img src="images/post-hydration.jpg" alt="Hydration bottle desert campaign post">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ POSTER DESIGNS ============ -->
+  <section>
+    <h2 class="section-title">POSTER DESIGNS</h2>
+    <div class="stack posters">
+      <figure>
+        <div class="shot ratio-1" data-label="poster-motorola-edge-60.jpg">
+          <img src="images/poster-motorola-edge-60.jpg" alt="Motorola Edge 60 Fusion poster">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1" data-label="poster-race-your-edge.jpg">
+          <img src="images/poster-race-your-edge.jpg" alt="Race Your Edge motorcycle poster">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-23" data-label="poster-future-is-watching.jpg">
+          <img src="images/poster-future-is-watching.jpg" alt="The Future Is Watching poster">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-23" data-label="poster-frosted.jpg">
+          <img src="images/poster-frosted.jpg" alt="Frosted poster">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ BRANDING ============ -->
+  <section>
+    <h2 class="section-title xl">BRANDING</h2>
+    <p class="section-note">
+      EVOX is a modern lifestyle brand that blends technology, style, and individuality.
+      We create products that elevate everyday experiences with bold aesthetics, refined
+      design, and premium quality. EVOX represents confidence, performance, and the
+      evolution of contemporary living.
+    </p>
+    <div class="stack branding">
+      <figure>
+        <div class="shot ratio-45" data-label="evox-logo.jpg">
+          <img src="images/evox-logo.jpg" alt="EVOX logo on deep maroon background">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-45" data-label="evox-earbuds.jpg">
+          <img src="images/evox-earbuds.jpg" alt="EVOX earbuds case mockup">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-45" data-label="evox-headphones.jpg">
+          <img src="images/evox-headphones.jpg" alt="EVOX over-ear headphones mockup">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ MAGAZINE COVERS ============ -->
+  <section>
+    <h2 class="section-title">MAGAZINE COVER DESIGN</h2>
+    <div class="stack">
+      <figure>
+        <div class="shot ratio-45" data-label="magazine-the-weeknd.jpg">
+          <img src="images/magazine-the-weeknd.jpg" alt="Music magazine cover mockup held in hand">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-45" data-label="magazine-fashion.jpg">
+          <img src="images/magazine-fashion.jpg" alt="Fashion magazine cover mockup held in hand">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ BOOK COVERS ============ -->
+  <section>
+    <h2 class="section-title">BOOK COVER DESIGN</h2>
+    <div class="stack">
+      <figure>
+        <div class="shot ratio-45" data-label="book-silence.jpg">
+          <img src="images/book-silence.jpg" alt="Silence book cover mockup">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-45" data-label="book-serenity.jpg">
+          <img src="images/book-serenity.jpg" alt="Serenity book cover mockup">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ LOGOS ============ -->
+  <section>
+    <h2 class="section-title">LOGO DESIGNS</h2>
+    <div class="logo-grid">
+      <figure>
+        <div class="shot ratio-1 plain" data-label="logo-harsh-dsgn.png">
+          <img src="images/logo-harsh-dsgn.png" alt="Harsh Dsgn logo">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1 plain" data-label="logo-nuvia.png">
+          <img src="images/logo-nuvia.png" alt="Nuvia logo">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1 plain" data-label="logo-prily.png">
+          <img src="images/logo-prily.png" alt="Prily logo">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-1 plain" data-label="logo-cre8-academy.png">
+          <img src="images/logo-cre8-academy.png" alt="Cre8 Academy logo">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ TYPOGRAPHY ============ -->
+  <section>
+    <h2 class="section-title">TYPOGRAPHY DESIGNS</h2>
+    <p class="kicker">WHEN WORDS START SPEAKING VISUALLY</p>
+    <p class="sub">A series of typographic experiments where each word carries its own meaning.</p>
+    <div class="type-grid">
+      <figure><div class="shot ratio-1" data-label="type-blink.jpg"><img src="images/type-blink.jpg" alt="Blink typography study"></div></figure>
+      <figure><div class="shot ratio-1" data-label="type-void.jpg"><img src="images/type-void.jpg" alt="Void typography study"></div></figure>
+      <figure><div class="shot ratio-1" data-label="type-fold.jpg"><img src="images/type-fold.jpg" alt="Fold typography study"></div></figure>
+      <figure><div class="shot ratio-1" data-label="type-echo.jpg"><img src="images/type-echo.jpg" alt="Echo typography study"></div></figure>
+      <figure><div class="shot ratio-1" data-label="type-pulse.jpg"><img src="images/type-pulse.jpg" alt="Pulse typography study"></div></figure>
+      <figure><div class="shot ratio-1" data-label="type-root.jpg"><img src="images/type-root.jpg" alt="Root typography study"></div></figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ WALLPAPERS ============ -->
+  <section>
+    <h2 class="section-title">WALLPAPER DESIGNS</h2>
+    <div class="grid-2">
+      <figure>
+        <div class="shot ratio-916" data-label="wallpaper-layers.jpg">
+          <img src="images/wallpaper-layers.jpg" alt="Abstract layered paper-cut wallpaper">
+        </div>
+      </figure>
+      <figure>
+        <div class="shot ratio-916" data-label="wallpaper-sphere.jpg">
+          <img src="images/wallpaper-sphere.jpg" alt="Textured sphere and light wallpaper">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ BANNER ============ -->
+  <section>
+    <h2 class="section-title xl">BANNER DESIGN</h2>
+    <figure>
+      <div class="shot ratio-169" data-label="banner-stance.jpg">
+        <img src="images/banner-stance.jpg" alt="Stance apparel web banner">
+      </div>
+    </figure>
+  </section>
+
+  <footer>
+    <span>Harsh Kanojia — Graphic Designer</span>
+    <a href="mailto:graphixharsh@gmail.com">graphixharsh@gmail.com</a>
+  </footer>
+
+</main>
+
+<script>
+  // Show the filename placeholder whenever an image file isn't there yet.
+  document.querySelectorAll('.shot img').forEach(function (img) {
+    var frame = img.parentElement;
+    function flag() { frame.setAttribute('data-missing', 'true'); }
+    img.addEventListener('error', flag);
+    if (img.complete && img.naturalWidth === 0) flag();
+  });
+</script>
+
+</body>
+</html>
